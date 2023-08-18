@@ -73,7 +73,14 @@
 
 .title-welcome {
   font-size: 1.5em;
-  margin-bottom: 4%;
+}
+
+.title-logout-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: first baseline;
+  justify-content: space-between;
 }
 
 .create-cigarettes-container {
@@ -178,6 +185,25 @@ select {
 
 .btn-add-cigarette:hover {
   background-color: rgb(255, 248, 123);
+  transform: scale(1.02);
+}
+
+.button-logOut {
+  width: 80px;
+  height: 28px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2% 0 2% 0;
+  font-size: 14px;
+  background: hsla(0, 77%, 68%, 0.88);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color .3s ease-in-out, transform .3s ease-in-out; 
+}
+.button-logOut:hover {
+  background: hsl(0, 100%, 50%);
   transform: scale(1.02);
 }
 

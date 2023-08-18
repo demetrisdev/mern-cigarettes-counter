@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 
 
 const LeftContainer = ({ username, userId }) => {
-    const [cookies, _] = useCookies(["access_token"]);
+    const [cookies, setCookie, removeCookie ] = useCookies(["access_token"]);
     const navigate = useNavigate();
     const location = useLocation();
     const currentDate = new Date();
@@ -104,9 +104,20 @@ const LeftContainer = ({ username, userId }) => {
       }
     };
 
+    
+  const exitRoom = () => {
+    removeCookie("access_token", { path: "/" }); 
+    localStorage.clear();
+    window.history.replaceState(null, "", "/"); //
+    navigate("/");
+  }
+
   return (
     <div className="left-container">
+      <div className="title-logout-container">
+        <button onClick={exitRoom} className='button-logOut'>Log Out</button>
         <h1 className="title-welcome">Welcome {username}!</h1>
+      </div>
         <div className="create-cigarettes-container">
           <form className="create-cigarettes-form" onSubmit={handleSubmit}>
             <label htmlFor="name">Cigarettes Brand</label>
