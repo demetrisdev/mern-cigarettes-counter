@@ -6,8 +6,6 @@ Chart.register();
 
 const CigaretteChart = ({ cigaretteData }) => {
 
-    console.log(cigaretteData);
-
     const chartData = {
         labels: Object.keys(cigaretteData),
         datasets: [
