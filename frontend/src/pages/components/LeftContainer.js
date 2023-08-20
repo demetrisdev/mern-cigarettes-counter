@@ -165,7 +165,6 @@ const LeftContainer = ({ username, userId }) => {
                 </option>
               ))}
             </select>
-            {console.log("selectedPackage:", selectedPackage)}
             {selectedPackage && (
               <>
                 <label htmlFor="numCigarettes">Number of cigarettes</label>

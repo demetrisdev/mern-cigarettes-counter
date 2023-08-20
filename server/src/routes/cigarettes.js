@@ -34,6 +34,28 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
+router.get("/daily-consumption/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    const cigarettesSmoked = await CigaretteModel.find({
+      userOwner: { $in: user },
+    });
+
+    res.status(200).json({ cigarettesSmoked });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
 // POST Request to Create a New Package
 router.post("/", verifyToken, async (req, res) => {
   const cigarettePackage = new PackageModel({
@@ -68,10 +90,9 @@ router.post("/addcigarette", verifyToken, async (req, res) => {
     _id: new mongoose.Types.ObjectId(),
     cigarettePackage: req.body.cigarettePackage,
     numCigarettes: req.body.numCigarettes,
-    userOwner: req.body.userOwner
+    userOwner: req.body.userOwner,
+    time: req.body.time
   });
-
-  console.log(addNewCigarette.time);
 
   try {
     const result = await addNewCigarette.save();
@@ -84,6 +105,9 @@ router.post("/addcigarette", verifyToken, async (req, res) => {
         time: req.body.time
       },
     });
+
+    console.log(addNewCigarette.time);
+  
   } catch (err) {
     res.status(500).json(err);
   }

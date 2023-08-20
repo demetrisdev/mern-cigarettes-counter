@@ -1,3 +1,8 @@
+.home {
+  display: flex;
+  flex-direction: row;
+}
+
 .container {
     display: flex;
     margin-top: 3%;
