@@ -12,8 +12,8 @@ const CigaretteChart = ({ cigaretteData }) => {
             {
                 label: 'Daily Cigarette Consumption',
                 data: cigaretteData.map(entry => entry.numCigarettes),
-                borderColor: 'rgba(255, 0, 0, 0.84)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(255, 0, 0, 0.50)',
+                backgroundColor: 'rgba(255, 255, 255, 1)',
                 text: 'Daily Cigarette Consumption',
             },
         ],
