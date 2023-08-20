@@ -84,25 +84,32 @@ const LeftContainer = ({ username, userId }) => {
   
     const handleAddCigaretteSubmit = async (event) => {
       event.preventDefault();
+  
+      // Check if numCigarettes is not empty, is a valid whole number, and is greater than 0
+      if (!numCigarettes || isNaN(numCigarettes) || !Number.isInteger(parseFloat(numCigarettes)) || parseInt(numCigarettes) <= 0) {
+          alert("Invalid number!");
+          return;
+      }
+  
       try {
           await axios.post("http://localhost:3001/cigarettes/addcigarette", {
-          cigarettePackage: selectedPackage,
-          numCigarettes: numCigarettes,
-          time: currentDate,
-          userOwner: userId,
-          },
-          {
-            headers: { authorization: cookies.access_token },
-          }
-        );
-          
-        alert("Cigarettes Added");
-        setSelectedPackage(""); // Clear the selected package
-        setNumCigarettes(""); // Clear the number of cigarettes
+              cigarettePackage: selectedPackage,
+              numCigarettes: numCigarettes,
+              time: currentDate,
+              userOwner: userId,
+          }, {
+              headers: { authorization: cookies.access_token },
+          });
+  
+          alert("Cigarettes Added");
+          setSelectedPackage("");
+          setNumCigarettes("");
       } catch (error) {
-        console.error(error);
+          console.error(error);
       }
-    };
+  };
+  
+  
 
     
   const exitRoom = () => {
