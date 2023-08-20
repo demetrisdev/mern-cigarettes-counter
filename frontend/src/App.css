@@ -207,8 +207,27 @@ select {
   cursor: pointer;
   transition: background-color .3s ease-in-out, transform .3s ease-in-out; 
 }
+
 .button-logOut:hover {
   background: hsl(0, 100%, 50%);
   transform: scale(1.02);
 }
 
+.right-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-container {
+  padding-left: 10%;
+  padding-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+}
+
+.chart {
+  width: 100%;
+}

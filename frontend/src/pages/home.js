@@ -25,7 +25,7 @@ export const Home = () => {
 
         const extractedData = response.data.cigarettesSmoked.map(entry => ({
             numCigarettes: entry.numCigarettes,
-            time: entry.time.split("T")[0],
+            time: new Date(entry.time).toLocaleDateString('en-UK', { year: 'numeric', month: 'numeric', day: 'numeric' }),
         }));
 
         const groupedData = {}; // Object to group data by date
@@ -54,7 +54,7 @@ fetchDailyConsumptionData();
 
   return (
     <div className="home">
-       <LeftContainer username={username} userId={userId} />
+        <LeftContainer username={username} userId={userId} />
       <div className="right-container">
         <CigaretteChart cigaretteData={cigaretteData} />
       </div>
