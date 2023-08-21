@@ -44,7 +44,15 @@ const PackagesMoneyChart = ({ username, userId }) => {
                         label: 'Monthly Cost of Smoking in Euros',
                         data: combinedArray.map(entry => entry.price),
                         borderColor: 'rgba(255, 0, 0, 0.50)',
-                        backgroundColor: 'rgba(255, 0, 0, 0.50)',
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(201, 203, 207, 0.2)'
+                          ],
                     },
                 ],
             };
@@ -58,7 +66,7 @@ const PackagesMoneyChart = ({ username, userId }) => {
                                 size: 14
                             }
                         }
-                    }
+                    },
                 },
                 scales: {
                     x: {
@@ -75,7 +83,7 @@ const PackagesMoneyChart = ({ username, userId }) => {
                     y: {
                         title: {
                             display: true,
-                            text: 'Cost of Packages',
+                            text: 'Cigarette Consumption',
                             font: {
                                 weight: 'bold',
                                 size: 14
@@ -85,7 +93,6 @@ const PackagesMoneyChart = ({ username, userId }) => {
                 },
             };
 
-            // Render the chart
             const ctx = document.getElementById('moneyChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
