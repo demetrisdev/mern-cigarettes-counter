@@ -5,8 +5,7 @@ import { useGetUserID } from "../hooks/useGetUserID";
 import { useCookies } from "react-cookie";
 import LeftContainer from "./components/LeftContainer"; 
 import CigaretteChart from './components/CigaretteChart';
-import 'chart.js';
-
+import PackagesMoneyChart from './components/PackagesMoneyChart'
 
 export const Home = () => {
   const userId = useGetUserID();
@@ -28,7 +27,7 @@ export const Home = () => {
             time: new Date(entry.time).toLocaleDateString('en-UK', { year: 'numeric', month: 'numeric', day: 'numeric' }),
         }));
 
-        const groupedData = {}; // Object to group data by date
+        const groupedData = {};
 
         extractedData.forEach(entry => {
             if (!groupedData[entry.time]) {
@@ -47,16 +46,17 @@ export const Home = () => {
     } catch (error) {
         console.error(error);
     }
-};
+  };
 
-fetchDailyConsumptionData();
-
+  fetchDailyConsumptionData();
 
   return (
     <div className="home">
         <LeftContainer username={username} userId={userId} />
       <div className="right-container">
         <CigaretteChart cigaretteData={cigaretteData} />
+        <PackagesMoneyChart username={username} userId={userId} />
+
       </div>
     </div>
   );
