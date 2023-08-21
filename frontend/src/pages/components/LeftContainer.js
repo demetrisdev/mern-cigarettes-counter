@@ -123,7 +123,6 @@ const LeftContainer = ({ username, userId }) => {
     <div className="left-container">
       <div className="title-logout-container">
         <button onClick={exitRoom} className='button-logOut'>Log Out</button>
-        <h1 className="title-welcome">Welcome {username}!</h1>
       </div>
         <div className="create-cigarettes-container">
           <form className="create-cigarettes-form" onSubmit={handleSubmit}>

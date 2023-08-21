@@ -51,13 +51,15 @@ export const Home = () => {
   fetchDailyConsumptionData();
 
   return (
-    <div className="home">
+   <>
+      <h1 className="title-welcome">Welcome {username}!</h1>
+      <div className="home">
         <LeftContainer username={username} userId={userId} />
-      <div className="right-container">
-        <CigaretteChart cigaretteData={cigaretteData} />
-        <PackagesMoneyChart username={username} userId={userId} />
-
+        <div className="right-container">
+          <CigaretteChart cigaretteData={cigaretteData} />
+          <PackagesMoneyChart username={username} userId={userId}/>
+        </div>
       </div>
-    </div>
+    </> 
   );
 };
