@@ -2,7 +2,7 @@ import Chart from 'chart.js/auto';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-//import { Bar } from "react-chartjs-2";
+//import { Line } from "react-chartjs-2";
 
 Chart.register();
 
@@ -80,7 +80,6 @@ const NicotineChart = ({ username, userId }) => {
             };
 
             const options = {
-                indexAxis: 'y',
                 plugins: {
                     legend: {
                         labels: {
@@ -117,7 +116,7 @@ const NicotineChart = ({ username, userId }) => {
 
             const ctx = document.getElementById('nicotineChart').getContext('2d');
             new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: chartData,
                 options: options,
             });
