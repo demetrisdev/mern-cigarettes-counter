@@ -67,8 +67,6 @@ router.post("/", verifyToken, async (req, res) => {
     time: req.body.time
   });
   
-  console.log(cigarettePackage.time);
-
   try {
     const result = await cigarettePackage.save();
     res.status(201).json({
@@ -106,7 +104,6 @@ router.post("/addcigarette", verifyToken, async (req, res) => {
       },
     });
 
-    console.log(addNewCigarette.time);
   
   } catch (err) {
     res.status(500).json(err);

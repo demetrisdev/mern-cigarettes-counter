@@ -8,7 +8,6 @@ import CigaretteChart from './components/CigaretteChart';
 import PackagesMoneyChart from './components/PackagesMoneyChart'
 import NicotineChart from './components/NicotineChart'
 
-
 export const Home = () => {
   const userId = useGetUserID();
   const [cookies, _] = useCookies(["access_token"]);

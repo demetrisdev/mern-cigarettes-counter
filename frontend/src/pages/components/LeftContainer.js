@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
-
+import RewardSystem from './RewardSystem'
 
 const LeftContainer = ({ username, userId }) => {
     const [cookies, setCookie, removeCookie ] = useCookies(["access_token"]);
@@ -108,9 +108,6 @@ const LeftContainer = ({ username, userId }) => {
           console.error(error);
       }
   };
-  
-  
-
     
   const exitRoom = () => {
     removeCookie("access_token", { path: "/" }); 
@@ -192,6 +189,7 @@ const LeftContainer = ({ username, userId }) => {
             )}
           </form>
         </div>
+        <RewardSystem username={username} userId={userId} />
       </div>
   );
 };

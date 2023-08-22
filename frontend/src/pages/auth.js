@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const Auth = () => {
   return (
     <div className="container">
-      <h1 className="title"> Today is the day you will quite!</h1>
+      <h1 className="title"> Today is the day you will quit!</h1>
       <div className="auth">
         <Login />
         <Register />

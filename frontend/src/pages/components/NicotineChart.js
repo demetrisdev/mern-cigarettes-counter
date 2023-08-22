@@ -53,16 +53,13 @@ const NicotineChart = ({ username, userId }) => {
 
             const groupedDataArray = Object.values(groupedData);
 
-            
             setCigaretteData(groupedDataArray);
-
-            console.log(groupedDataArray);
 
             const chartData = {
                 labels: groupedDataArray.map(entry => entry.date),
                 datasets: [
                     {
-                        label: 'Daily Intake of Nicotine in',
+                        label: 'Daily Intake of Nicotine in mg',
                         
                         data: groupedDataArray.map(entry => entry.totalNicotineIntake),
                         borderColor: 'rgba(255, 0, 0, 0.50)',
@@ -94,7 +91,7 @@ const NicotineChart = ({ username, userId }) => {
                     x: {
                         title: {
                             display: true,
-                            text: 'Nicotine Intake',
+                            text: 'Date',
                             font: {
                                 weight: 'bold',
                                 size: 14
@@ -104,7 +101,7 @@ const NicotineChart = ({ username, userId }) => {
                     y: {
                         title: { 
                             display: true,
-                            text: 'Date',
+                            text: 'Nicotine Intake',
                             font: {
                                 weight: 'bold',
                                 size: 14
