@@ -2,11 +2,11 @@ import Chart from 'chart.js/auto';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { Bar } from "react-chartjs-2";
+//import { Bar } from "react-chartjs-2";
 
 Chart.register();
 
-const PackagesMoneyChart = ({ username, userId }) => {
+const NicotineChart = ({ username, userId }) => {
     const [cookies, _] = useCookies(["access_token"]);
     const [cigaretteData, setCigaretteData] = useState([]);
 
@@ -17,32 +17,54 @@ const PackagesMoneyChart = ({ username, userId }) => {
             });
 
             const extractedData = response.data.savedCigarettes.map(entry => ({
-                price: entry.price,
-                time: new Date(entry.time).toLocaleDateString('en-UK', { year: 'numeric', month: 'numeric' }),
+                cigarettesBrand: entry.cigarettesBrand,
+                nicotineLevel: entry.nicotineLevel,
+            }));
+                       
+            const extractedDataCigarettes = response.data.cigarettesSmoked.map(entry => ({
+                cigarettePackage: entry.cigarettePackage,
+                time: new Date(entry.time).toLocaleDateString('en-UK', { year: 'numeric', month: 'numeric', day: 'numeric' }),
+                numCigarettes: entry.numCigarettes
             }));
 
-            const groupedData = {};
-
-            extractedData.forEach(entry => {
-                if (!groupedData[entry.time]) {
-                    groupedData[entry.time] = 0;
+            for (const cigaretteEntry of extractedDataCigarettes) {
+                const matchingDataEntry = extractedData.find(dataEntry => dataEntry.cigarettesBrand === cigaretteEntry.cigarettePackage);
+                if (matchingDataEntry) {
+                    cigaretteEntry.nicotineLevel = matchingDataEntry.nicotineLevel;
                 }
-                groupedData[entry.time] += entry.price;
-            });
+            }
 
-            const combinedArray = Object.entries(groupedData).map(([time, price]) => ({
-                time,
-                price,
-            }));
+            const groupedData = extractedDataCigarettes.reduce((result, entry) => {
+                const date = entry.time;
+                const nicotineLevel = entry.nicotineLevel;
+                const numCigarettes = entry.numCigarettes;
 
-            setCigaretteData(combinedArray);
+                if (!result[date]) {
+                    result[date] = {
+                        date: date,
+                        totalNicotineIntake: +(nicotineLevel * numCigarettes).toFixed(2), 
+                    };
+                } else {
+                    result[date].totalNicotineIntake += +(nicotineLevel * numCigarettes).toFixed(2);
+                }
+
+                return result;
+            }, {});
+
+            const groupedDataArray = Object.values(groupedData);
+
+            
+            setCigaretteData(groupedDataArray);
+
+            console.log(groupedDataArray);
 
             const chartData = {
-                labels: combinedArray.map(entry => entry.time),
+                labels: groupedDataArray.map(entry => entry.date),
                 datasets: [
                     {
-                        label: 'Monthly Cost of Smoking',
-                        data: combinedArray.map(entry => entry.price),
+                        label: 'Daily Intake of Nicotine in',
+                        
+                        data: groupedDataArray.map(entry => entry.totalNicotineIntake),
                         borderColor: 'rgba(255, 0, 0, 0.50)',
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -58,6 +80,7 @@ const PackagesMoneyChart = ({ username, userId }) => {
             };
 
             const options = {
+                indexAxis: 'y',
                 plugins: {
                     legend: {
                         labels: {
@@ -70,10 +93,9 @@ const PackagesMoneyChart = ({ username, userId }) => {
                 },
                 scales: {
                     x: {
-                        type: 'category', 
                         title: {
                             display: true,
-                            text: 'Month',
+                            text: 'Nicotine Intake',
                             font: {
                                 weight: 'bold',
                                 size: 14
@@ -81,9 +103,9 @@ const PackagesMoneyChart = ({ username, userId }) => {
                         },
                     },
                     y: {
-                        title: {
+                        title: { 
                             display: true,
-                            text: 'Cigarette Consumption',
+                            text: 'Date',
                             font: {
                                 weight: 'bold',
                                 size: 14
@@ -93,7 +115,7 @@ const PackagesMoneyChart = ({ username, userId }) => {
                 },
             };
 
-            const ctx = document.getElementById('moneyChart').getContext('2d');
+            const ctx = document.getElementById('nicotineChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: chartData,
@@ -111,9 +133,9 @@ const PackagesMoneyChart = ({ username, userId }) => {
 
     return (
         <div className="chart-container-money">
-            <canvas id="moneyChart" className='chart-money'></canvas>
+            <canvas id="nicotineChart" className='chart-money'></canvas>
         </div>
     );
 }
 
-export default PackagesMoneyChart;
+export default NicotineChart;

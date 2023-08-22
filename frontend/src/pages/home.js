@@ -6,6 +6,8 @@ import { useCookies } from "react-cookie";
 import LeftContainer from "./components/LeftContainer"; 
 import CigaretteChart from './components/CigaretteChart';
 import PackagesMoneyChart from './components/PackagesMoneyChart'
+import NicotineChart from './components/NicotineChart'
+
 
 export const Home = () => {
   const userId = useGetUserID();
@@ -58,6 +60,7 @@ export const Home = () => {
         <div className="right-container">
           <CigaretteChart cigaretteData={cigaretteData} />
           <PackagesMoneyChart username={username} userId={userId}/>
+          <NicotineChart username={username} userId={userId}/>
         </div>
       </div>
     </> 
