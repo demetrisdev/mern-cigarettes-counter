@@ -11,55 +11,24 @@ import NicotineChart from './components/NicotineChart'
 export const Home = () => {
   const userId = useGetUserID();
   const [cookies, _] = useCookies(["access_token"]);
-  const navigate = useNavigate();
   const location = useLocation();
   const username = location.state && location.state.username;
+
+  const [refreshFlag, setRefreshFlag] = useState(false);
   
-  const [cigaretteData, setCigaretteData] = useState([]);
-
-  const fetchDailyConsumptionData = async () => {
-    try {
-        const response = await axios.get(`http://localhost:3001/cigarettes/daily-consumption/${userId}`, {
-            headers: { authorization: cookies.access_token },
-        });
-
-        const extractedData = response.data.cigarettesSmoked.map(entry => ({
-            numCigarettes: entry.numCigarettes,
-            time: new Date(entry.time).toLocaleDateString('en-UK', { year: 'numeric', month: 'numeric', day: 'numeric' }),
-        }));
-
-        const groupedData = {};
-
-        extractedData.forEach(entry => {
-            if (!groupedData[entry.time]) {
-                groupedData[entry.time] = 0;
-            }
-            groupedData[entry.time] += entry.numCigarettes;
-        });
-
-        const combinedArray = Object.entries(groupedData).map(([date, numCigarettes]) => ({
-            date,
-            numCigarettes,
-        }));
-
-        setCigaretteData(combinedArray);
-
-    } catch (error) {
-        console.error(error);
-    }
+  const handleRefresh = () => {
+    setRefreshFlag(prevFlag => !prevFlag);
   };
-
-  fetchDailyConsumptionData();
-
+  
   return (
    <>
       <h1 className="title-welcome">Welcome {username}!</h1>
       <div className="home">
-        <LeftContainer username={username} userId={userId} />
+        <LeftContainer username={username} userId={userId} onPostRequest={handleRefresh} />
         <div className="right-container">
-          <CigaretteChart cigaretteData={cigaretteData} />
-          <PackagesMoneyChart username={username} userId={userId}/>
-          <NicotineChart username={username} userId={userId}/>
+          <CigaretteChart username={username} userId={userId} refreshFlag={refreshFlag} />
+          <PackagesMoneyChart username={username} userId={userId} refreshFlag={refreshFlag} />
+          <NicotineChart username={username} userId={userId} refreshFlag={refreshFlag} />
         </div>
       </div>
     </> 

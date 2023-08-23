@@ -269,7 +269,7 @@ select {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.322);
   display: flex;
   margin-top: 4%;
-  width: 20%;
+  width: fit-content;
   height: fit-content;
   margin-bottom: 2%;
   padding: 2%;
@@ -286,11 +286,12 @@ select {
   flex-direction: row;
 }
 
-.infosSymbol {
+.infoSymbol {
   cursor: pointer;
   font-size: 17px;
-  margin: 8% 0% 2% 2%;
+  margin: 9% 0% 2% 2%;
   font-weight: 900;
+  height: fit-content;
 }
 
 .explanation-container {
@@ -298,13 +299,24 @@ select {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.322);
   display: flex;
   margin: 2% 0% 0% 2%;
-  width: 50%;
-  padding: 2%;
+  width: 84%;
   height: fit-content;
   background-color: #e0e0e06d;
-  
+  opacity: 0; 
+  transition: opacity .6s ease-in; 
+}
+
+.explanation-visible {
+  opacity: 1;
 }
 
 .explanation {
-  font-size: 12px;
+  width: 100%;
+  padding: 4% 4% 2% 0;
+  margin-left: 8%;
+  font-size: 13.5px;
+}
+
+li {
+  padding-bottom: 4%;
 }

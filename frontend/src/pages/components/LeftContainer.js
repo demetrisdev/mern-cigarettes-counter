@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import RewardSystem from './RewardSystem'
 
-const LeftContainer = ({ username, userId }) => {
+const LeftContainer = ({ username, userId, onPostRequest }) => {
     const [cookies, setCookie, removeCookie ] = useCookies(["access_token"]);
     const navigate = useNavigate();
     const location = useLocation();
@@ -70,19 +70,21 @@ const LeftContainer = ({ username, userId }) => {
     const handleSubmit = async (event) => {
       event.preventDefault();
       try {
-        await axios.post("http://localhost:3001/cigarettes", cigarette, {
-          headers: { authorization: cookies.access_token },
-        });
+          await axios.post("http://localhost:3001/cigarettes", cigarette, {
+              headers: { authorization: cookies.access_token },
+          });
   
-        alert("Package Added");
-        fetchCigarettePackages();
-        setCigarette(initialCigaretteState);
+          alert("Package Added");
+          fetchCigarettePackages();
+          setCigarette(initialCigaretteState);
+          onPostRequest(); // Add this line
+          console.log("handlePostRequest called"); // Add this line
       } catch (error) {
-        console.error(error);
+          console.error(error);
       }
-    };
+  };
   
-    const handleAddCigaretteSubmit = async (event) => {
+  const handleAddCigaretteSubmit = async (event) => {
       event.preventDefault();
   
       // Check if numCigarettes is not empty, is a valid whole number, and is greater than 0
@@ -104,10 +106,13 @@ const LeftContainer = ({ username, userId }) => {
           alert("Cigarettes Added");
           setSelectedPackage("");
           setNumCigarettes("");
+          onPostRequest();
+          console.log("handlePostRequest called");
       } catch (error) {
           console.error(error);
       }
   };
+  
     
   const exitRoom = () => {
     removeCookie("access_token", { path: "/" }); 

@@ -2,16 +2,17 @@ import Chart from 'chart.js/auto';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-//import { Line } from "react-chartjs-2";
 
-Chart.register();
-
-const NicotineChart = ({ username, userId }) => {
+const NicotineChart = ({ username, userId, refreshFlag }) => {
     const [cookies, _] = useCookies(["access_token"]);
     const [cigaretteData, setCigaretteData] = useState([]);
+    const [chartInstance, setChartInstance] = useState(null);
 
     const fetchDailyConsumptionData = async () => {
         try {
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
             const response = await axios.get(`http://localhost:3001/cigarettes/${userId}`, {
                 headers: { authorization: cookies.access_token },
             });
@@ -111,12 +112,14 @@ const NicotineChart = ({ username, userId }) => {
                 },
             };
 
-            const ctx = document.getElementById('nicotineChart').getContext('2d');
-            new Chart(ctx, {
+            const ctx = document.getElementById(`nicotineChart-${userId}`).getContext('2d');
+            const newChartInstance = new Chart(ctx, {
                 type: 'line',
                 data: chartData,
                 options: options,
             });
+            setChartInstance(newChartInstance);
+
 
         } catch (error) {
             console.error(error);
@@ -125,11 +128,16 @@ const NicotineChart = ({ username, userId }) => {
 
     useEffect(() => {
         fetchDailyConsumptionData();
-    }, []);
+        return () => {
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+        };
+    }, [userId, refreshFlag]);
 
     return (
         <div className="chart-container-money">
-            <canvas id="nicotineChart" className='chart-money'></canvas>
+            <canvas id={`nicotineChart-${userId}`}  className='chart-money'></canvas>
         </div>
     );
 }
