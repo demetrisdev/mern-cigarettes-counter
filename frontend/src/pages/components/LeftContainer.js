@@ -10,6 +10,12 @@ const LeftContainer = ({ username, userId, onPostRequest }) => {
     const location = useLocation();
     const currentDate = new Date();
 
+    const [refreshPage, setRefreshPage] = useState(false);
+
+    const refreshingPage = () => {
+      setRefreshPage(prevPage => !prevPage);
+    };
+
     const initialCigaretteState = {
       cigarettesBrand: "",
       price: "",
@@ -112,7 +118,6 @@ const LeftContainer = ({ username, userId, onPostRequest }) => {
           console.error(error);
       }
   };
-  
     
   const exitRoom = () => {
     removeCookie("access_token", { path: "/" }); 
@@ -120,7 +125,7 @@ const LeftContainer = ({ username, userId, onPostRequest }) => {
     window.history.replaceState(null, "", "/"); //
     navigate("/");
   }
-
+  
   return (
     <div className="left-container">
       <div className="title-logout-container">
@@ -194,7 +199,7 @@ const LeftContainer = ({ username, userId, onPostRequest }) => {
             )}
           </form>
         </div>
-        <RewardSystem username={username} userId={userId} />
+        <RewardSystem username={username} userId={userId} refreshingPage={refreshingPage} />
       </div>
   );
 };

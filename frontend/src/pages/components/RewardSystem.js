@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
-const RewardSystem = ({ username, userId, refreshFlag }) => {
+const RewardSystem = ({ username, userId, refreshingPage }) => {
     const [cookies, _] = useCookies(["access_token"]);
     const [cigaretteData, setCigaretteData] = useState([]);
     const [points, setPoints] = useState(0); 
@@ -46,10 +46,22 @@ const RewardSystem = ({ username, userId, refreshFlag }) => {
     
             combinedArray.forEach((entry, index) => {
                 const previousEntry = combinedArray[index - 1];
+
+                if (entry.numCigarettes < 15) {
+                    if (previousEntry && (previousEntry.numCigarettes - entry.numCigarettes) === 1) {
+                        points += 1;
+                    }
+                }
+
+                if (entry.numCigarettes < 15) {
+                    if (previousEntry && (previousEntry.numCigarettes - entry.numCigarettes) === 2) {
+                        points += 2;
+                    }
+                }
     
                 if (entry.numCigarettes < 15) {
                     if (previousEntry && (previousEntry.numCigarettes - entry.numCigarettes) > 3) {
-                        points += 3;
+                        points += 4;
                     }
                 }
                 
@@ -73,7 +85,7 @@ const RewardSystem = ({ username, userId, refreshFlag }) => {
     
     useEffect(() => {
         fetchDailyConsumptionData();
-    }, [userId, refreshFlag]);
+    }, [userId, refreshingPage]);
     
     return (
     <>
@@ -85,6 +97,8 @@ const RewardSystem = ({ username, userId, refreshFlag }) => {
                 <span onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="infoSymbol"> &#9432; </span>
                 <div className={`explanation-container ${explanationVisible ? 'explanation-visible' : ''}`}>
                     <ul className="explanation">
+                        <li>If cigarettes smoked decreased by 1, 1 point awarded.</li>   
+                        <li>If cigarettes smoked decreased by 2, 2 points awarded.</li>   
                         <li>If cigarettes smoked decreased by 3 or more, 4 points awarded.</li>   
                         <li>If cigarettes smoked increased by 3 or more, 4 points reduction.</li> 
                         <li>If cigarettes smoked stayed the same, 2 points awarded.</li>
