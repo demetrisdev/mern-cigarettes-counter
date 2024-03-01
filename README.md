@@ -1,4 +1,4 @@
-<div height="350px" width="auto" align='center'><img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/32500c2f-28e5-4158-80e2-275cae5bc66f'/></div>
+<div align='center'><img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/2f44339f-6b21-4dd5-a94f-a3c94761819e'/></div>
 
 <h2>About the project</h2>
 
