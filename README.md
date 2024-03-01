@@ -1,1 +1,1 @@
-![—Pngtree—no smoking logo_3990086](https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/56c81ad8-d1bb-407d-a127-312724aef0ec)
+![—Pngtree—no smoking logo_3990086resized700](https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/c9fda02f-7cdc-4f52-8a54-999c7214e0dc)
