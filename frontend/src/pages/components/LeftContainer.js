@@ -122,7 +122,7 @@ const LeftContainer = ({ username, userId, onPostRequest }) => {
   const exitRoom = () => {
     removeCookie("access_token", { path: "/" }); 
     localStorage.clear();
-    window.history.replaceState(null, "", "/"); //
+    window.history.replaceState(null, "", "/");
     navigate("/");
   }
   

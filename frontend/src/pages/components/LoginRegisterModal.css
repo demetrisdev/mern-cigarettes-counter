@@ -1,0 +1,48 @@
+.login-register-modal {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+
+.login-register-modal[open] {
+    animation: slide-in-from-top 0.5s ease-out;
+}
+
+.login-register-modal::backdrop {
+    background: rgba(109, 109, 109, 0.801);
+}
+
+.login-register-modal button{
+    background-color: rgba(255, 170, 170, 0.63);
+    font-size: 1em;
+    font-weight: 600;
+    padding: .5rem 1rem;
+    outline: none;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;   
+    transition: background-color .1s ease-in-out, transform .1s ease-in-out; 
+}
+
+.login-register-modal button:hover {
+    background-color: rgb(255, 0, 0);
+    transform: scale(1.05);
+}
+
+@keyframes slide-in-from-top {
+  0% {
+    transform: translateY(-15%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 700px) {
+    .login-register-modal {
+        flex-direction: column;
+    }
+}
+  

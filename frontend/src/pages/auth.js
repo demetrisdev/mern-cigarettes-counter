@@ -1,119 +1,40 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+
+import LoginRegisterModal from "./components/LoginRegisterModal";
+import companyLogo from '../public/images/logo-image.png';
+import screenshots from '../public/images/screenshots.png';
+
+import "./auth.css";
 
 export const Auth = () => {
+  const [modal, setModal] = useState(false);
+
   return (
-    <div className="container">
-      <h1 className="title"> Today is the day you will quit!</h1>
-      <div className="auth">
-        <Login />
-        <Register />
+    <>
+      <LoginRegisterModal
+        openModal={modal}
+        closeModal={() => setModal(false)}
+      />
+      <div className="logo-container">
+        <h1>QuitSmoke</h1>
+        <img src={companyLogo} alt="QuitSmokeLoggo"/>
       </div>
-    </div>
+      <div className="main-container">
+        <div className="welcoming-container">
+          <h4> Powerfull API to help you stop smoking</h4>
+          <p>
+            Let us help you in this journey, <strong>you can do it!</strong>
+            <br/>Start reducing your
+            cigarette intakes with this powefull app... <br/> You have the power... 
+            we will just help you along the way!
+          </p>
+          <h5>👇 Simply Login or Register</h5>
+          <button onClick={() => setModal(true)} >Enter</button>
+        </div>
+        <div className="screenshot-container">
+          <img src={screenshots} alt="System"/>
+        </div>
+      </div>
+    </>
   );
 };
-
-const Login = () => {
-  const [_, setCookies] = useCookies(["access_token"]);
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const result = await axios.post("http://localhost:3001/auth/login", {
-        username,
-        password,
-      });
-      
-      setCookies("access_token", result.data.token);
-      window.localStorage.setItem("userID", result.data.userID);
-      navigate("/home", { state: { username } });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  return (
-    <div className="auth-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <div className="form-group">
-          <label className="auth-label" htmlFor="username">Username:</label>
-          <input className="auth-input"
-            type="text"
-            id="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label className="auth-label" htmlFor="password">Password:</label>
-          <input className="auth-input"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </div>
-        <button className="auth-button" type="submit">Login</button>
-      </form>
-    </div>
-  );
-  
-};
-
-const Register = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [_, setCookies] = useCookies(["access_token"]);
-  const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      await axios.post("http://localhost:3001/auth/register", {
-        username,
-        password,
-      });
-      alert("Registration Completed! Now login.");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  return (
-    <div className="auth-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </div>
-        <button className="auth-button" type="submit">Register</button>
-      </form>
-    </div>
-  );
-};
-

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useCookies } from "react-cookie";
 import LeftContainer from "./components/LeftContainer"; 
@@ -22,7 +21,7 @@ export const Home = () => {
   
   return (
    <>
-      <h1 className="title-welcome">Welcome {username}!</h1>
+      <h1 className="title-welcome">Welcome {username} to your dashboard!</h1>
       <div className="home">
         <LeftContainer username={username} userId={userId} onPostRequest={handleRefresh} />
         <div className="right-container">
