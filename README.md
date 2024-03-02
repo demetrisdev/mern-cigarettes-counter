@@ -2,12 +2,16 @@
 
 <h2>About the project</h2>
 
-<p>This is an online API built using  <strong>MongoDB, Express.js, React, and Node.js</strong>. It's purpose is to help the users reduce thier cigarette consumptin, by illustrating their nikotin intake as well the money spent on sigarettes. On the API there is also a login system implemented personalizing the user experience. Additionally the user will find a points reward system, which helps to motivate the reduction of cigarettes use.</p>
+<p>This is an online API built using  <strong>MongoDB, Express.js, React, and Node.js</strong>. 
+  It's purpose is to help the users upload and listen freely their music. It implements a personalized <strong>Login System, Register System</strong>
+  as well as a <strong>File System</strong>, so that the user can upload there music and listen to it, in a simple to use yet elegant
+  system! It is a <strong>fully responsive API!</strong>
+  </p>
 
 <h3>Build with:</h3>
 
 » Vanilla CSS <br>
-» React <br>
+» JSX <br>
 » MongoDB <br>
 » Node.js <br>
 » Express.js
@@ -17,15 +21,19 @@
 <h3 align='center'>Home Page 🏡</h3>
 
 <div align='center'>
-<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/b7154fdb-5ce0-4870-ba60-2c8259d0878a'/>
-<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/a1a246f3-fd15-48d3-b923-49bc21572a0e'/>
+<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/96319027-f314-4bc0-ab69-3f5c41494ac9'/>
+
+<h3 align='center'>Login Page 🔐🗝️</h3>
+
+<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/333ecaa8-47e5-4a70-80fb-48ad4a982b76'/>
 </div>
 
 <br><br>
 
-<h3 align='center'>User Interface Page 👇</h3>
+<h3 align='center'>User Interface Page 👇😊</h3>
 
 <div align='center'>
-<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/f6bc386f-1369-4498-93ba-310c7fedf53a'/>
-<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/da5aa1ed-61e7-4424-8cc9-1619d226a150'/>
+<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/225b1d94-5c25-4127-b946-6ac8f1bf4786'/>
+<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/be0482b1-327d-4471-acf1-bfd6509e679a'/>
+<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/92b0266f-3205-4511-8a38-5e57af6feb75'/>  
 </div>
