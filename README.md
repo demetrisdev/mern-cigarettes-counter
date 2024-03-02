@@ -17,7 +17,8 @@
 <h3 align='center'>Home Page 🏡</h3>
 
 <div align='center'>
-<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/8bf2df48-71a4-441a-a7cf-49bd272d465a'/>
+<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/cc8be61a-c299-416c-88ea-7d2bba4dfa09'/>
+<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/e2d90c80-e131-4b7a-8edf-c12ec4fa1dcc'/>
 </div>
 
 <br><br>
@@ -25,6 +26,6 @@
 <h3 align='center'>User Interface Page 👇</h3>
 
 <div align='center'>
-<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/ddee0855-cedb-4eb9-b0b9-2a83d0c5b864'/>
+<img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/77d2a899-5ed5-42f6-8fda-14815a2905ce'/>
 <img src='https://github.com/demetrisdev/mern-cigarettes-counter/assets/112802137/da5aa1ed-61e7-4424-8cc9-1619d226a150'/>
 </div>
